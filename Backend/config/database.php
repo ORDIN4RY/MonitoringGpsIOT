@@ -1,9 +1,9 @@
 <?php
 
 $host = "localhost";
-$username = "gpsuser";
-$password = "password123";
-$database = "gps_monitoring";
+$username = "gps_iot";
+$password = "123";
+$database = "gps_access";
 
 $conn = new mysqli(
     $host,
@@ -17,7 +17,8 @@ if ($conn->connect_error) {
 
     die(json_encode([
         "status" => false,
-        "message" => "Koneksi database gagal"
+        "message" => "Koneksi database gagal",
+        "error" => $conn->connect_error
     ]));
 }
 

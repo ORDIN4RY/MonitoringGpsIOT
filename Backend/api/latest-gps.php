@@ -7,7 +7,6 @@ require_once "../config/database.php";
 $sql = "
     SELECT
         id,
-        device_id,
         latitude,
         longitude,
         created_at
@@ -33,9 +32,8 @@ if (!$result) {
 if ($result->num_rows === 0) {
 
     echo json_encode([
-        "status" => true,
-        "message" => "Belum ada data GPS",
-        "data" => null
+        "status" => false,
+        "message" => "Belum ada data GPS"
     ]);
 
     exit;
@@ -45,12 +43,10 @@ $data = $result->fetch_assoc();
 
 echo json_encode([
     "status" => true,
-    "message" => "Data GPS terbaru",
     "data" => [
-        "id" => (int) $data["id"],
-        "device_id" => $data["device_id"],
-        "latitude" => (float) $data["latitude"],
-        "longitude" => (float) $data["longitude"],
+        "id" => (int)$data["id"],
+        "latitude" => (float)$data["latitude"],
+        "longitude" => (float)$data["longitude"],
         "created_at" => $data["created_at"]
     ]
 ]);
